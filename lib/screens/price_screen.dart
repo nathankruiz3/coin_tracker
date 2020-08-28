@@ -11,19 +11,24 @@ class PriceScreen extends StatefulWidget {
 class _PriceScreenState extends State<PriceScreen> {
   String selectedCurrency = 'AUD';
 
+  // Function to create the Android style Dropdown Button
   DropdownButton<String> getDropDownButton() {
+    // Create a list of dropdown items
     List<DropdownMenuItem<String>> dropdownItems = [];
+    // Each dropdown item will have a value of the strings in currenciesList
     for (String currency in currenciesList) {
       var newItem = DropdownMenuItem(
         child: Text(currency),
         value: currency,
       );
+      // Add the items to the list
       dropdownItems.add(newItem);
     }
 
     return DropdownButton<String>(
       value: selectedCurrency,
       items: dropdownItems,
+      // When a different item is selected, set the value of the selectedCurrency to the selceted value, and get the new data from the API
       onChanged: (value) {
         setState(() {
           selectedCurrency = value;
@@ -32,9 +37,12 @@ class _PriceScreenState extends State<PriceScreen> {
       },
     );
   }
-
+  
+  // Function to create the iOS style Cupertino Picker
   CupertinoPicker getCupertinoPicker() {
+    // Create a list of picker items (Text Widgets)
     List<Text> pickerItems = [];
+    // Each picker item will have a value of the strings in currenciesList
     for (String currency in currenciesList) {
       var newItem = Text(
         currency,
@@ -45,6 +53,7 @@ class _PriceScreenState extends State<PriceScreen> {
 
     return CupertinoPicker(
       itemExtent: 32.0,
+      // When a different item is selected, set the value of the selectedCurrency to the selceted value, and get the new data from the API
       onSelectedItemChanged: (selectedIndex) {
         setState(() {
           selectedCurrency = currenciesList[selectedIndex];
@@ -54,10 +63,12 @@ class _PriceScreenState extends State<PriceScreen> {
       children: pickerItems,
     );
   }
-
+  
+  // reprsents the values of coin we get back from the Api
   Map<String, String> coinValues = {};
   bool isWaiting = false;
 
+  // Function that gets the currency values of each crypto
   void getData() async {
     isWaiting = true;
     try {
@@ -78,7 +89,8 @@ class _PriceScreenState extends State<PriceScreen> {
 
     getData();
   }
-
+  
+  // Populates the column with custom cards with the values from coinValues 
   Column makeCards() {
     List<Widget> cryptoCards = [];
     for (String crypto in cryptoList) {
