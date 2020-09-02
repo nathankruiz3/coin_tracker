@@ -3,6 +3,8 @@ import 'package:coin_tracker/networking.dart';
 const apiKey = '0';
 
 class CoinModel {
+  
+  // Function to get the current value of a selected currency from the CoinAPI
   Future getCoinData(String selectedCurrency) async {
     Map<String, String> cryptoPrices = {};
     for (String crypto in cryptoList) {
@@ -17,6 +19,7 @@ class CoinModel {
   }
 }
 
+// List of Strings to repesent the currency types in the DropdownButton and CupertinoPicker
 const List<String> currenciesList = [
   'AUD',
   'BRL',
@@ -41,10 +44,9 @@ const List<String> currenciesList = [
   'ZAR'
 ];
 
+// List of Strings to represent the crypto values 
 const List<String> cryptoList = [
   'BTC',
   'ETH',
   'LTC',
 ];
-
-class CoinData {}
